@@ -1,0 +1,7 @@
+D:\CV\Trimble\BattleGameApp\bin\Debug\BattleGameApp.exe.config
+D:\CV\Trimble\BattleGameApp\bin\Debug\BattleGameApp.exe
+D:\CV\Trimble\BattleGameApp\bin\Debug\BattleGameApp.pdb
+D:\CV\Trimble\BattleGameApp\obj\Debug\BattleGameApp.csprojAssemblyReference.cache
+D:\CV\Trimble\BattleGameApp\obj\Debug\BattleGameApp.csproj.CoreCompileInputs.cache
+D:\CV\Trimble\BattleGameApp\obj\Debug\BattleGameApp.exe
+D:\CV\Trimble\BattleGameApp\obj\Debug\BattleGameApp.pdb
