@@ -48,6 +48,7 @@
     <Compile Include="Rules.cs" />
     <Compile Include="Warrior.cs" />
     <Compile Include="Weapons.cs" />
+    <Compile Include="Wizard.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
