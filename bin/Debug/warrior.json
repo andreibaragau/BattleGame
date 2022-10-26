@@ -1,0 +1,12 @@
+[
+  {
+    "Health": "100",
+    "MaxAttack": "20",
+    "MaxBlock": "10"
+  },
+  {
+    "Health": "100",
+    "MaxAttack": "15",
+    "MaxBlock": "5"
+  }
+]

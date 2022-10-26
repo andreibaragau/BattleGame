@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
+using System.IO;
 
 namespace BattleGameApp
 {
@@ -86,14 +88,28 @@ namespace BattleGameApp
                     
             }
         }
-        public void Play()
+        public void readJson()
         {
-            warrior1.Health = 100;
-            warrior1.MaxAttack = 10;
-            warrior1.MaxBlock = 5;
-            warrior2.Health = 100;
-            warrior2.MaxAttack = 15;
-            warrior2.MaxBlock = 10;
+            string fileName = "warrior.json";
+            
+            using (StreamReader r = new StreamReader(fileName))
+            {
+                string json = r.ReadToEnd();
+                JavaScriptSerializer jss = new JavaScriptSerializer();
+                
+                var Items = jss.Deserialize<Warrior[]>(json);
+                              
+                warrior1.Health = Items[0].Health;
+                warrior1.MaxAttack = Items[0].MaxAttack;
+                warrior1.MaxBlock = Items[0].MaxBlock;
+                warrior2.Health = Items[1].Health;
+                warrior2.MaxAttack = Items[1].MaxAttack;
+                warrior2.MaxBlock = Items[1].MaxBlock;
+            }
+        }
+        public void Play()
+        {           
+            readJson();
 
             int round = 0;
                     
