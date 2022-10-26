@@ -17,7 +17,40 @@ namespace BattleGameApp
             
             return rnd.Next(0, maxVal);
         }
+             
+        public int switchWeaponsAttack(Warrior warrior)
+        {
+            Weapons weapons = new Weapons();
+            int opt = rnd.Next(4);
+            switch(opt)
+            {
+                case 1: return weapons.BonusDoubleDamage(CalculateAttackBlock(warrior.MaxAttack));
 
+                case 2: return weapons.BonusTripleDamage(CalculateAttackBlock(warrior.MaxAttack));
+                
+                case 3: return weapons.MaxAttackWeapon();
+                
+                default: return CalculateAttackBlock(warrior1.MaxAttack); 
+            }
+            
+        }
+
+        public int switchWeaponsDefend(Warrior warrior)
+        {
+            Weapons weapons = new Weapons();
+            int opt = rnd.Next(6);
+            switch (opt)
+            {
+                case 1: return weapons.BonusDoubleBlock(CalculateAttackBlock(warrior.MaxBlock));
+
+                case 2: return weapons.BonusTripleDamage(CalculateAttackBlock(warrior.MaxBlock));
+                
+                case 3: return weapons.EvadeAttack();
+                
+                default: return CalculateAttackBlock(warrior1.MaxBlock);
+            }
+
+        }
         public void Play()
         {
             warrior1.Health = 100;
@@ -32,10 +65,9 @@ namespace BattleGameApp
             while (true)
             {
                 if (round == 0)
-                {
-                    //random
-                    int warrior1Attack = CalculateAttackBlock(warrior1.MaxAttack); 
-                    int warrior2Block = CalculateAttackBlock(warrior2.MaxBlock); 
+                {                    
+                    int warrior1Attack = switchWeaponsAttack(warrior1);
+                    int warrior2Block = switchWeaponsDefend(warrior2);
 
                     if (warrior1Attack > warrior2Block)
                     {
@@ -43,6 +75,7 @@ namespace BattleGameApp
                         warrior2.Health -= damage;
                         Console.WriteLine("Attacker:{0}, attack value {1}, Defender: {2}, block value {3}","W1", warrior1Attack, "w2", warrior2Block);
                         Console.WriteLine("Winner of this round {0}, damage: {1}, remaining health of the loser {2}", "w1", damage, warrior2.Health);
+                        Console.WriteLine("health w1->{0}, w2->{1}", warrior1.Health, warrior2.Health);
                         Console.WriteLine("***********");
                     } else if (warrior1Attack <= warrior2Block)
                     {
@@ -53,16 +86,17 @@ namespace BattleGameApp
                     round = 1;                 
                 }
                 else
-                {
-                    int warrior2Attack = CalculateAttackBlock(warrior2.MaxAttack);
-                    int warrior1Block = CalculateAttackBlock(warrior1.MaxBlock);
+                {                 
+                    int warrior2Attack = switchWeaponsAttack(warrior2);
+                    int warrior1Block = switchWeaponsDefend(warrior1);
 
-                    if(warrior2Attack > warrior1Block)
+                    if (warrior2Attack > warrior1Block)
                     {
                         int damage = warrior2Attack - warrior1Block;
                         warrior1.Health -= damage;
                         Console.WriteLine("Attacker:{0}, attack value {1}, Defender: {2}, block value {3}", "W2", warrior2Attack, "w1", warrior1Block);
                         Console.WriteLine("Winner of this round {0}, damage: {1}, remaining health of the loser {2}", "w2", damage, warrior1.Health);
+                        Console.WriteLine("health w1->{0}, w2->{1}",warrior1.Health, warrior2.Health);
                         Console.WriteLine("***********");
                     }
                     else if (warrior2Attack <= warrior1Block)
