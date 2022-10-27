@@ -1,12 +1,27 @@
 [
   {
+    "Name":"Warrior A",
     "Health": "100",
     "MaxAttack": "20",
     "MaxBlock": "10"
   },
+
   {
+    "Name":"Warrior B",
     "Health": "100",
     "MaxAttack": "15",
+    "MaxBlock": "5"
+  },
+{
+    "Name":"Warrior C",
+    "Health": "100",
+    "MaxAttack": "10",
+    "MaxBlock": "20"
+  },
+{
+    "Name":"Warrior D",
+    "Health": "100",
+    "MaxAttack": "12",
     "MaxBlock": "5"
   }
 ]

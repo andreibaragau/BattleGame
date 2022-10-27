@@ -91,20 +91,29 @@ namespace BattleGameApp
         public void readJson()
         {
             string fileName = "warrior.json";
-            
+            if(!File.Exists(fileName))
+                Console.WriteLine("No file found!");
+
             using (StreamReader r = new StreamReader(fileName))
             {
                 string json = r.ReadToEnd();
                 JavaScriptSerializer jss = new JavaScriptSerializer();
                 
                 var Items = jss.Deserialize<Warrior[]>(json);
-                              
-                warrior1.Health = Items[0].Health;
-                warrior1.MaxAttack = Items[0].MaxAttack;
-                warrior1.MaxBlock = Items[0].MaxBlock;
-                warrior2.Health = Items[1].Health;
-                warrior2.MaxAttack = Items[1].MaxAttack;
-                warrior2.MaxBlock = Items[1].MaxBlock;
+                int i = rnd.Next(0, Items.Count() -1);
+                int j = rnd.Next(0, Items.Count() -1);
+                while(i==j)
+                {
+                    j = rnd.Next(0, Items.Count() - 1);
+                }
+                warrior1.Name = Items[i].Name;
+                warrior1.Health = Items[i].Health;
+                warrior1.MaxAttack = Items[i].MaxAttack;
+                warrior1.MaxBlock = Items[i].MaxBlock;
+                warrior2.Name = Items[j].Name;
+                warrior2.Health = Items[j].Health;
+                warrior2.MaxAttack = Items[j].MaxAttack;
+                warrior2.MaxBlock = Items[j].MaxBlock;
             }
         }
         public void Play()
@@ -126,13 +135,13 @@ namespace BattleGameApp
                     {
                         int damage = warrior1Attack - warrior2Block;
                         warrior2.Health -= damage;
-                        Console.WriteLine("Attacker:{0}, attack value {1}, Defender: {2}, block value {3}","Warrior1", warrior1Attack, "Warrior2", warrior2Block);
-                        Console.WriteLine("Winner of this round {0}, damage: {1}, remaining health of the loser {2}", "Warrior1", damage, warrior2.Health);
-                        Console.WriteLine("health w1->{0}, w2->{1}", warrior1.Health, warrior2.Health);
+                        Console.WriteLine("Attacker:{0}, attack value {1}, Defender: {2}, block value {3}", warrior1.Name, warrior1Attack, warrior2.Name, warrior2Block);
+                        Console.WriteLine("Winner of this round {0}, damage: {1}, remaining health of the loser {2}", warrior1.Name, damage, warrior2.Health);
+                        Console.WriteLine("health {0}->{1}, {2}->{3}", warrior1.Name, warrior1.Health, warrior2.Name, warrior2.Health);
                         Console.WriteLine("***********");
                     } else if (warrior1Attack <= warrior2Block)
                     {
-                        Console.WriteLine("{0} block the attack", "Warrior2");
+                        Console.WriteLine("{0} block the attack", warrior2.Name);
                         Console.WriteLine("***********");
                     }
                 
@@ -149,14 +158,14 @@ namespace BattleGameApp
                     {
                         int damage = warrior2Attack - warrior1Block;
                         warrior1.Health -= damage;
-                        Console.WriteLine("Attacker:{0}, attack value {1}, Defender: {2}, block value {3}", "Warrior2", warrior2Attack, "Warrior1", warrior1Block);
-                        Console.WriteLine("Winner of this round {0}, damage: {1}, remaining health of the loser {2}", "Warrior2", damage, warrior1.Health);
-                        Console.WriteLine("health Warrior1->{0}, Warrior2->{1}", warrior1.Health, warrior2.Health);
+                        Console.WriteLine("Attacker:{0}, attack value {1}, Defender: {2}, block value {3}", warrior2.Name, warrior2Attack, warrior1.Name, warrior1Block);
+                        Console.WriteLine("Winner of this round {0}, damage: {1}, remaining health of the loser {2}", warrior2.Name, damage, warrior1.Health);
+                        Console.WriteLine("health {0}->{1}, {2}->{3}", warrior1.Name, warrior1.Health, warrior2.Name, warrior2.Health);
                         Console.WriteLine("***********");
                     }
                     else if (warrior2Attack <= warrior1Block)
                     {
-                        Console.WriteLine("{0} block the attack", "Warrior1");
+                        Console.WriteLine("{0} block the attack", warrior1.Name);
                         Console.WriteLine("***********");
                     }
                     round = 0;
@@ -165,12 +174,12 @@ namespace BattleGameApp
 
                 if (warrior1.Health > 0 && warrior2.Health <= 0) 
                 {
-                    Console.WriteLine("{0} win", "Warrior1");
+                    Console.WriteLine("{0} win", warrior1.Name);
                     return;
                 }
                 if (warrior2.Health > 0 && warrior1.Health <= 0)
                 {
-                    Console.WriteLine("{0} win", "Warrior2");
+                    Console.WriteLine("{0} win", warrior2.Name);
                     return;
                 }
                 if (warrior1.Health <= 0 && warrior2.Health <= 0)

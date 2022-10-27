@@ -8,7 +8,7 @@ namespace BattleGameApp
 {
     class Warrior
     {
-        //public string Name { get; set }
+        public string Name { get; set; }
         public int Health { get; set; }
         public int MaxAttack { get; set; }
         public int MaxBlock { get; set; }

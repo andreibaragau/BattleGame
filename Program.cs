@@ -9,9 +9,7 @@ namespace BattleGameApp
     class Program
     {
         static void Main(string[] args)
-        {
-            //Console.WriteLine("hello");
-            //Console.Read();
+        {          
             Rules rules = new Rules();
             rules.Play();
             Console.Read();
